@@ -24,7 +24,7 @@ yarn dev
 
 la doc de l'api : https://studio.apollographql.com/public/SpaceX-pxxbxen/home?variant=current
 
-### Créer une page de détails de vaisseaux
+### Créer une page de détails de bateaux
 
 Accessible au click sur une card qui change l'url pour aller sur la page dédiée qui affiche plus de détails ( missions, roles, historique )
 
