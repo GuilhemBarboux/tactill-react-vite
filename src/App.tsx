@@ -3,6 +3,7 @@ import './App.css'
 import { getShips } from './services/graphql'
 
 type Ships = {
+  id: string,
   name: string
   type: string,
   home_port: string,
