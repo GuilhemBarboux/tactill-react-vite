@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { getShips } from './services/graphql'
+import {Container} from "theme-ui";
+import ShipTable from "@components/Ship/ShipTable"
 
 const App = () => {
-  const [ships, setShips] = useState<Ships[]>([])
+  const [ships, setShips] = useState<Ship[]>([])
 
   useEffect(() => {
     getShips().then(setShips)
@@ -12,18 +14,9 @@ const App = () => {
   console.log(ships);
 
   return (
-    <div className="App">
-      {ships.map((s, i) => (
-        <div className="ship" key={s.name + i}>
-          <h3>{s.name}</h3>
-          <img src={s.image} alt={'image of ' + s.name} width="100"/>
-          <ul>
-            <li>{s.type}</li>
-            <li>{s.home_port}</li>
-          </ul>
-        </div>
-      ))}
-    </div>
+    <Container>
+      <ShipTable ships={ships}/>
+    </Container>
   )
 }
 
