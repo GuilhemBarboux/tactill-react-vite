@@ -10,4 +10,10 @@ export const theme: Theme = {
     initialColorModeName: 'deep',
     printColorModeName: 'default',
   },
+  layout: {
+    container: {
+      maxWidth: 1024,
+      py: 2
+    }
+  },
 }
