@@ -7,7 +7,6 @@ export const theme: Theme = {
     useColorSchemeMediaQuery: false,
     useLocalStorage: false,
     initialColorModeName: 'deep',
-    printColorModeName: 'default',
   },
   buttons: {
     secondary: {

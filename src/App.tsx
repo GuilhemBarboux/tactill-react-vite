@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import { getShips } from './services/graphql'
 import {Container} from "theme-ui";
 import ShipTable from "@components/Ship/ShipTable"
@@ -11,12 +11,17 @@ const App = () => {
     getShips().then(setShips)
   })
 
-  console.log(ships);
+  const onShipSelected = useCallback(
+    (selected: Ship) => {
+      console.info(selected)
+    },
+    [],
+  );
 
   return (
     <Container>
       <Themed.h1>List of ships</Themed.h1>
-      <ShipTable ships={ships}/>
+      <ShipTable onShipSelected={onShipSelected} ships={ships}/>
     </Container>
   )
 }
