@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import './App.css'
 import { getShips } from './services/graphql'
 import {Container} from "theme-ui";
 import ShipTable from "@components/Ship/ShipTable"

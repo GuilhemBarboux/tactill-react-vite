@@ -12,7 +12,7 @@
     "@apollo/client": "^3.7.7",
     "@emotion/react": "^11.10.6",
     "@theme-ui/mdx": "^0.15.5",
-    "@theme-ui/preset-funk": "^0.15.5",
+    "@theme-ui/preset-system": "^0.15.5",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
