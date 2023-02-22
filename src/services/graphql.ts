@@ -10,6 +10,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
+export const SHIP_FIELDS = gql`
+  fragment ShipFields on Ship {
+    id
+    name
+    type
+    image
+    home_port
+  }
+`;
+
 export const getShip = (id: string) =>
   client
     .query({
@@ -17,12 +27,10 @@ export const getShip = (id: string) =>
         shipId: id,
       },
       query: gql`
+        ${SHIP_FIELDS}
         query Ship($shipId: ID!) {
-          ship(id: $shipId) {
-            name
-            type
-            image
-            home_port
+          ships(id: $shipId) {
+            ...ShipFields
           }
         }
       `,
@@ -33,13 +41,10 @@ export const getShips = () =>
   client
     .query({
       query: gql`
+        ${SHIP_FIELDS}
         query Ships {
           ships {
-            id
-            name
-            type
-            image
-            home_port
+            ...ShipFields
           }
         }
       `,
