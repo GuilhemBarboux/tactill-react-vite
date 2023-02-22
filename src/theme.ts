@@ -1,9 +1,6 @@
 import type { Theme } from 'theme-ui'
+import preset from '@theme-ui/preset-funk'
 
 export const theme: Theme = {
-  colors: {
-    text: '#000',
-    background: '#fff',
-    primary: '#33e',
-  },
+  ...preset
 }
