@@ -1,28 +1,18 @@
-import React, {useState, useEffect, useCallback} from 'react'
-import { getShips } from './services/graphql'
-import {Container} from "theme-ui";
-import ShipTable from "@components/Ship/ShipTable"
-import { Themed } from '@theme-ui/mdx';
+import React from 'react'
+import {Route, Routes} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ShipPage from "./pages/ShipPage";
 
 const App = () => {
-  const [ships, setShips] = useState<Ship[]>([])
-
-  useEffect(() => {
-    getShips().then(setShips)
-  })
-
-  const onShipSelected = useCallback(
-    (selected: Ship) => {
-      console.info(selected)
-    },
-    [],
-  );
-
   return (
-    <Container>
-      <Themed.h1>List of ships</Themed.h1>
-      <ShipTable onShipSelected={onShipSelected} ships={ships}/>
-    </Container>
+    <Routes>
+      <Route index element={<HomePage/>} />
+      <Route path="/" element={<HomePage/>}>
+        <Route index />
+        <Route path="ship/:shipId" element={<ShipPage />} />
+        <Route path="*" element={<div>No match</div>} />
+      </Route>
+    </Routes>
   )
 }
 
