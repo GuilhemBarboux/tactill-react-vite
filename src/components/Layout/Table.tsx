@@ -2,6 +2,7 @@ import React, {FunctionComponent} from 'react';
 import {Row, TableInstance} from "react-table";
 import {Themed} from "@theme-ui/mdx"
 import {Button, Text} from 'theme-ui';
+import RightChevron from "@components/icons/RightChevron";
 
 interface OwnProps {
   onRowClick?: (row: Row<any>) => void
@@ -32,7 +33,7 @@ const Table: FunctionComponent<TableInstance<any> & Props> = ({onRowClick, page,
               <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
             );
           })}
-          {onRowClick && (<td>{'-->'}</td>)}
+          {onRowClick && (<td><RightChevron/></td>)}
         </tr>
       );
     })}

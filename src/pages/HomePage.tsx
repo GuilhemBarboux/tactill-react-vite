@@ -1,9 +1,9 @@
-import React, {FC, useCallback, useEffect, useState} from 'react'
-import {Container} from "theme-ui";
-import {getShips} from '@services/graphql'
+import React, {FC, useCallback, useContext} from 'react'
+import {Button, Container, Flex, Heading} from "theme-ui";
 import ShipTable from "@components/Ship/ShipTable"
-import {Themed} from '@theme-ui/mdx';
 import {Outlet, useNavigate, useParams} from "react-router-dom";
+import {ShipContext} from "@components/Ship/ShipProvider";
+import Refresh from "@components/icons/Refresh";
 
 interface OwnProps {}
 
@@ -12,40 +12,29 @@ type Props = OwnProps;
 const HomePage: FC<Props> = () => {
   const navigate = useNavigate();
   const { shipId } = useParams();
-
-  const [ships, setShips] = useState<Ship[]>([])
-  const [selectedShip, setSelectedShip] = useState<Ship | null>(null)
-
-  useEffect(() => {
-    getShips().then(setShips)
-  })
-
-  useEffect(() => {
-    if (selectedShip) {
-      navigate("/ship/" + selectedShip.id, {
-        state: {
-          ship: selectedShip
-        }
-      });
-    } else {
-      navigate("/")
-    }
-  }, [selectedShip]);
+  const { ships, refresh } = useContext(ShipContext);
 
   const onShipSelected = useCallback(
     (selected: Ship) => {
-      setSelectedShip(selected)
+      navigate("/ship/" + selected.id);
     },
-    [setSelectedShip],
+    [navigate],
   );
 
   return (
     <>
       <Container>
-        <Themed.h1>List of ships</Themed.h1>
+        <Flex sx={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 2
+        }}>
+          <Heading as="h1">List of ships </Heading>
+          <Button variant="refresh" onClick={() => refresh()}><Refresh/></Button>
+        </Flex>
         <ShipTable onShipSelected={onShipSelected} ships={ships}/>
       </Container>
-      {shipId && <Outlet context={{ ship: selectedShip, close: () => setSelectedShip(null)}}/>}
+      {shipId && <Outlet />}
     </>
   )
 }
